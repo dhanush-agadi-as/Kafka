@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: consumer
+
+  cloud:
+    function:
+      definition: consumer;consumer2
+    stream:
+      function:
+        definition: consumer;consumer2
+      bindings:
+        consumer-in-0:
+          destination: topic2
+          group: group2
+        consumer2-in-0:
+          destination: topic1
+          group: group2
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+
+#  kafka:
+#    consumer:
+#      bootstrap-servers: localhost:9092
+#      group-id: rider-group
+#      auto-offset-reset: earliest
+#
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#
+#      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+#
+#      properties:
+#        spring.json.trusted.packages: "*"
+#        spring.json.value.default.type: com.kafka.consumer.consumer.RiderLocation
+
+server:
+  port: 8084
